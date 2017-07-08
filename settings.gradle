@@ -1,1 +1,1 @@
-include ':app', ':Refactoring'
+include ':app', ':Refactoring', ':Learnrecord'
