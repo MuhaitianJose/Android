@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 
 import com.muhaitian.record.ILocalSocketAidlInterface;
 import com.muhaitian.record.entity.TestLocalSocket;
+import com.muhaitian.record.localsocket.LocalSocketClient;
+import com.muhaitian.record.localsocket.LocalSocketServer;
 
 /**
  * Created by wangkang001 on 2017/7/8.
@@ -44,7 +46,7 @@ public class LocalSocketService extends Service{
     private final ILocalSocketAidlInterface.Stub ibind = new ILocalSocketAidlInterface.Stub() {
         @Override
         public void getTestLocalSocket() throws RemoteException {
-
+            LocalSocketClient.getInstance().startSendInfo(mTestLocalSocket);
         }
     };
 

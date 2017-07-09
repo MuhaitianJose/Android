@@ -45,6 +45,10 @@ public class LocalSocketServer {
         this.mLocalSocketServerCallback = mLocalSocketServerCallback;
     }
 
+    public void startListenLocalSocket(){
+        ListenLocalSocketClient.execute(new ListeningRunnable());
+    }
+
     class ListeningRunnable implements Runnable {
 
         @Override

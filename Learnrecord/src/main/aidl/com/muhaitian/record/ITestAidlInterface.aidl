@@ -10,7 +10,7 @@ interface ITestAidlInterface {
      * and return values in AIDL.
      */
 
-    void sendInStudent(in Student student);
-    void sendOutStudent(out Student student);
-    void sendInOutStudent(inout Student studend);
+    Student sendInStudent(in Student student);
+    Student sendOutStudent(out Student student);
+    Student sendInOutStudent(inout Student studend);
 }

@@ -31,6 +31,10 @@ public class LocalSocketClient {
         return mLocalSocketClient;
     }
 
+    public void startSendInfo(TestLocalSocket testLocalSocket){
+        sendTestThread.execute(new sendTestRunnable(testLocalSocket));
+    }
+
     class sendTestRunnable implements Runnable {
         private TestLocalSocket testLocalSocket;
 
