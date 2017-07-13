@@ -48,7 +48,7 @@ public class LocalSocketClient {
             ObjectOutputStream objectOutputStream = null;
             if (!localSocket.isConnected()) {
                 try {
-                    localSocket.connect(new LocalSocketAddress(LocalSocketServer.LOCALSOCKET_ADDRESS, LocalSocketAddress.Namespace.ABSTRACT), 3000);
+                    localSocket.connect(new LocalSocketAddress(LocalSocketServer.LOCALSOCKET_ADDRESS, LocalSocketAddress.Namespace.ABSTRACT));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

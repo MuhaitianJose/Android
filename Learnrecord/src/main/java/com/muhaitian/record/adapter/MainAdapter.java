@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.muhaitian.record.R;
 import com.muhaitian.record.entity.Item;
@@ -19,6 +20,7 @@ public class MainAdapter extends BaseAdapter {
 
     private List<Item> MainContent;
     private Context mContext;
+    private ListView.OnItemClickListener mOnItemClickListener;
 
     public MainAdapter(Context context, List<Item> list) {
         mContext = context;
@@ -45,13 +47,20 @@ public class MainAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Item mItem = MainContent.get(position);
         ViewHolder mViewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.main_list_item, null);
             mViewHolder = new ViewHolder();
             mViewHolder.Content = (Button) convertView.findViewById(R.id.list_item);
+            final View finalConvertView = convertView;
+            mViewHolder.Content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(null, finalConvertView,position,0);
+                }
+            });
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
@@ -60,6 +69,10 @@ public class MainAdapter extends BaseAdapter {
         mViewHolder.Content.setText(mItem.getName());
 
         return convertView;
+    }
+
+    public void setmOnItemClickListener(ListView.OnItemClickListener OnItemClickListener) {
+        this.mOnItemClickListener = OnItemClickListener;
     }
 
     class ViewHolder {

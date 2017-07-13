@@ -20,7 +20,7 @@ import com.muhaitian.record.localsocket.BindService;
 
 public class AidlTestActivity extends AppCompatActivity {
     private final String TAG = AidlTestActivity.class.getSimpleName();
-    private Button InTest, OutTest, InOutTest;
+    private Button InTest, OutTest, InOutTest,bindservice;
     private TextView InBeforInfo, InAfterInfo, OutBeforeInfo, OutAfterInfo, InOutBeforeInfo, InOutAfterInfo;
     private Student InBeforeSt, InAfterSt, OutBeforeSt, OutAfterSt, InOutBeforeSt, InOutAfterSt;
     private BindService mBindService;
@@ -32,19 +32,13 @@ public class AidlTestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aidl_test);
-        Intent intent = new Intent();
-        ComponentName Name = ComponentName.unflattenFromString(AIDL_SERVICE_COMPONENT);
-        intent.setComponent(Name);
-        initData(intent);
+
+        initData(null);
         Initwidget();
     }
 
     private void initData(Intent intent) {
-        if (intent != null) {
-            mBindService = new BindService(getApplicationContext());
-            boolean results = mBindService.startBindAidlService(intent);
-            Log.d(TAG, "initData: results==" + results);
-        }
+
         InBeforeSt = new Student();
         InBeforeSt.setName("wangkang");
         InBeforeSt.setAge(24);
@@ -119,6 +113,18 @@ public class AidlTestActivity extends AppCompatActivity {
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        bindservice = (Button) findViewById(R.id.bindservice);
+        bindservice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                ComponentName Name = ComponentName.unflattenFromString(AIDL_SERVICE_COMPONENT);
+                intent.setComponent(Name);
+                mBindService = new BindService(getApplicationContext());
+                boolean results = mBindService.startBindAidlService(intent);
+                Log.d(TAG, "initData: results=="+results);
             }
         });
     }
